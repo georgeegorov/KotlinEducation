@@ -7,7 +7,7 @@ fun main() {
     }
 
     val numWashMachine = inputList.last();
-    val machineArray = Array(numWashMachine) { _ -> WashMachine() }
+    val washMachines = Array(numWashMachine) { _ -> WashMachine() }
 
     var hours: Int = 0
 
@@ -16,22 +16,22 @@ fun main() {
         var minRemainingHours : Int = Int.MAX_VALUE
         for (i in 0 until numWashMachine) {
 
-            if (itemList.isNotEmpty() && machineArray[i].isEmpty()) {
-                machineArray[i].placeWashItem(itemList.first())
+            if (itemList.isNotEmpty() && washMachines[i].isEmpty()) {
+                washMachines[i].placeWashItem(itemList.first())
                 itemList.removeAt(0)
             }
-            if (!machineArray[i].isEmpty()){
-                    if (machineArray[i].remainingWashHours() < minRemainingHours) minRemainingHours = machineArray[i].remainingWashHours()
+            if (!washMachines[i].isEmpty()){
+                    if (washMachines[i].remainingWashHours() < minRemainingHours) minRemainingHours = washMachines[i].remainingWashHours()
             }
         }
 
         // wash for
         for (i in 0 until numWashMachine) {
-            if (!machineArray[i].isEmpty()) machineArray[i].wash(minRemainingHours)
+            if (!washMachines[i].isEmpty()) washMachines[i].wash(minRemainingHours)
         }
         hours+= minRemainingHours
 
-    } while (itemList.isNotEmpty() || machineArray.any{!it.isEmpty()})
+    } while (itemList.isNotEmpty() || washMachines.any{!it.isEmpty()})
 
     println("Hours spent $hours")
 
